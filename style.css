@@ -108,4 +108,5 @@ textarea {
     flex-grow: 1;
     min-height: 1em;
     resize: none;
+    box-sizing: border-box;
 }
