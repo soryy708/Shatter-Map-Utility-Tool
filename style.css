@@ -76,6 +76,28 @@ p {
     border-end-start-radius: 0;
 }
 
+.shattedMapOutputContainer {
+    position: relative;
+}
+
+#shatterMapOutputCopyButton {
+    border-radius: 50%;
+    padding: 0.5em;
+    position: absolute;
+    top: 2em;
+    right: 1.5em;
+    box-shadow: 0 0 8px #888;
+    background-color: rgb(235, 223, 66);
+}
+
+#shatterMapOutputCopyButton:hover {
+    background-color: rgb(253, 244, 120);
+}
+
+#shatterMapOutputCopyButton:active {
+    background-color: rgb(201, 190, 37);
+}
+
 button {
     background-color: rgb(33, 87, 236);
     color: #fff;

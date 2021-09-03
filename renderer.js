@@ -12,6 +12,7 @@ const [
     bmpInputBrowseTextInput,
     bmpInputBrowseButton,
     shatterMapOutputElement,
+    shatterMapOutputCopyButton,
 ] = [
         document.getElementById('bmpOutputPathInput'),
         document.getElementById('bmpOutputPathButton'),
@@ -20,6 +21,7 @@ const [
         document.getElementById('bmpInputTextInput'),
         document.getElementById('bmpInputButton'),
         document.getElementById('shatterMapOutput'),
+        document.getElementById('shatterMapOutputCopyButton'),
     ];
 
 bmpOutputPathBrowseButton.addEventListener('click', async () => {
@@ -66,4 +68,9 @@ bmpInputBrowseButton.addEventListener('click', async () => {
     const bitmapFile = await fs.promises.readFile(selectedPath);
     const decodedData = decode(bitmapFile);
     shatterMapOutputElement.value = decodedData.join('\n');
+});
+
+shatterMapOutputCopyButton.addEventListener('click', () => {
+    shatterMapOutputElement.select();
+    document.execCommand('copy');
 });
