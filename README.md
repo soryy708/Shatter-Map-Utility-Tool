@@ -1,4 +1,4 @@
-# Shatter Map Utility Thing
+# Shatter Map Utility Tool
 
 Small utility for GTA V modders to take [CodeWalker](https://github.com/dexyfex/CodeWalker) outputted `<ShatterMap>` strings, convert them to a [BMP image](https://en.wikipedia.org/wiki/BMP_file_format), and convert [BMP images](https://en.wikipedia.org/wiki/BMP_file_format) back to `<ShatterMap>` strings.
 

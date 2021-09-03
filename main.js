@@ -10,7 +10,7 @@ function createWindow() {
             enableRemoteModule: true,
         },
         resizable: true,
-        title: 'Shatter Map Utility Thing',
+        title: 'Shatter Map Utility Tool',
     });
 
     mainWindow.setMenu(null);
