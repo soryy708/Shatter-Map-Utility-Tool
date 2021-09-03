@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Shatter Map Utility Thing</title>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="content">
+        <div class="left">
+            <h1><span>Shatter</span><span>Map</span> to BMP</h1>
+            <div class="pathInput">
+                <label>Path</label>
+                <input id="bmpOutputPathInput" type="text" />
+                <button id="bmpOutputPathButton" type="button">Browse</button>
+            </div>
+            <textarea id="shatterMapInput"></textarea>
+            <div class="bottom">
+                <p>
+                    Copy the &lt;ShatterMap&gt; contents in to this text area,
+                    and select a path where to write the BMP file.
+                </p>
+                <button id="bmpOutputSubmit" type="button">Save</button>
+            </div>
+        </div>
+        <div class="right">
+            <h1>BMP to <span>Shatter</span><span>Map</span></h1>
+            <div class="pathInput">
+                <label>Path</label>
+                <input id="bmpInputTextInput" type="text" />
+                <button id="bmpInputButton" type="button">Browse</button>
+            </div>
+            <textarea id="shatterMapOutput"></textarea>
+            <div class="bottom">
+                <p>
+                    Select a BMP file, and the &lt;ShatterMap&gt; will appear above.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./renderer.js"></script>
+</body>
+
+</html>
