@@ -93,9 +93,28 @@ bmpOutputSubmitButton.addEventListener('click', asyncWrapper(async () => {
     if (!bmpOutputPathInput.value || !shatterMapInputElement.value) {
         return;
     }
-    await fs.promises.mkdir(path.dirname(bmpOutputPathInput.value), { recursive: true });
-    const encodedData = encode(shatterMapInputElement.value.split('\n'));
-    await fs.promises.writeFile(bmpOutputPathInput.value, encodedData.data);
+    try {
+        await fs.promises.mkdir(path.dirname(bmpOutputPathInput.value), { recursive: true });
+    } catch (err) {
+        console.error(err.stack);
+        showToast('error', `Failed to create directory at ${path.dirname(bmpOutputPathInput.value)}`);
+        return;
+    }
+    let encodedData = null;
+    try {
+        encodedData = encode(shatterMapInputElement.value.split('\n'));
+    } catch (err) {
+        console.error(err.stack);
+        showToast('error', 'Failed to encode ShatterMap. Is the string formatted correctly?');
+        return;
+    }
+    try {
+        await fs.promises.writeFile(bmpOutputPathInput.value, encodedData.data);
+    } catch (err) {
+        console.error(err.stack);
+        showToast('error', `Failed to write bitmap to file at ${bmpOutputPathInput.value}`);
+        return;
+    }
     showToast('success', `Wrote BMP to ${bmpOutputPathInput.value} successfully.`);
 }));
 
@@ -117,8 +136,22 @@ bmpInputBrowseButton.addEventListener('click', asyncWrapper(async () => {
         return;
     }
     bmpInputBrowseTextInput.value = selectedPath;
-    const bitmapFile = await fs.promises.readFile(selectedPath);
-    const decodedData = decode(bitmapFile);
+    let bitmapFile = null;
+    try {
+        bitmapFile = await fs.promises.readFile(selectedPath);
+    } catch (err) {
+        console.error(err.stack);
+        showToast('error', `Failed to read file at ${selectedPath}`);
+        return;
+    }
+    let decodedData = null;
+    try {
+        decodedData = decode(bitmapFile);
+    } catch (err) {
+        console.error(err.stack);
+        showToast('error', `Failed to decode bitmap. Is it corrupted? Try a BMP with 8 bit depth without compression.`);
+        return;
+    }
     shatterMapOutputElement.value = decodedData.join('\n');
 }));
 
