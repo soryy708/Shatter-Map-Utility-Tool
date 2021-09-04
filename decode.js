@@ -32,7 +32,7 @@ function decode(data) {
     // There can be only one continuous `--` substring per line
     const optimizedData = mappedData.map(line => {
         const matches = line.match(/F+/gu);
-        if (matches.length === 0) {
+        if (!matches || matches.length === 0) {
             return line;
         }
         const sortedMatches = matches.sort((a, b) => b.length - a.length);
