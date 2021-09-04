@@ -30,6 +30,7 @@ p {
     height: 100vh;
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 .left, .right {
@@ -134,4 +135,57 @@ textarea {
     min-height: 1em;
     resize: none;
     box-sizing: border-box;
+}
+
+#toast {
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+    width: calc(100% - 2em);
+    box-sizing: border-box;
+    box-shadow: 3px 3px 8px #666;
+    border-radius: 5px;
+    font-size: 0.85em;
+    max-height: 0;
+    background-color: transparent;
+    transition: max-height 0.3s, background-color 0.3s, color 0.3s;
+    overflow: hidden;
+}
+
+#toast.success {
+    background-color: rgb(47, 175, 14);
+    color: #fff;
+    max-height: 4em;
+    overflow-y: auto;
+}
+
+#toast.error {
+    background-color: rgb(241, 79, 30);
+    color: #fff;
+    max-height: 4em;
+    overflow-y: auto;
+}
+
+#closeToastButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    background-color: transparent;
+}
+
+#closeToastButton:hover {
+    background-color: transparent;
+    transform: scale(1.25);
+}
+
+#closeToastButton:active {
+    background-color: transparent;
+}
+
+#toastText {
+    padding: 0.5em;
 }
