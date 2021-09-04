@@ -38,10 +38,15 @@ function decode(data) {
         const sortedMatches = matches.sort((a, b) => b.length - a.length);
         const longestMatch = sortedMatches[0];
         const index = line.indexOf(longestMatch);
+
+        // Make sure we don't replace half a pixel with a `-`, at the start and the end of the substring
+        const offsetIndex = index % 2 === 0 ? index : index + 1;
+        const substringLength = longestMatch.length % 2 === 0 ? longestMatch.length : longestMatch.length - 1;
+
         return [
-            line.slice(0, index),
-            '-'.repeat(longestMatch.length),
-            line.slice(index + longestMatch.length),
+            line.slice(0, offsetIndex),
+            '-'.repeat(substringLength),
+            line.slice(offsetIndex + substringLength),
         ].join('');
     });
     return optimizedData;
