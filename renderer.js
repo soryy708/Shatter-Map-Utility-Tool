@@ -152,7 +152,11 @@ bmpInputBrowseButton.addEventListener('click', asyncWrapper(async () => {
         showToast('error', `Failed to decode bitmap. Is it corrupted? Try a BMP with 8 bit depth without compression.`);
         return;
     }
+    const oldOutput = shatterMapOutputElement.value;
     shatterMapOutputElement.value = decodedData.join('\n');
+    if (oldOutput !== '') {
+        showToast('success', 'Decoded bitmap successfully.');
+    }
 }));
 
 shatterMapOutputCopyButton.addEventListener('click', () => {
