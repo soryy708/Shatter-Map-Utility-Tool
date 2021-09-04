@@ -64,7 +64,17 @@ function showToast(type, text) {
 
 closeToastButton.addEventListener('click', () => dismissToast());
 
-bmpOutputPathBrowseButton.addEventListener('click', async () => {
+function asyncWrapper(promisingFunction) {
+    return () => {
+        promisingFunction()
+            .catch(error => {
+                console.error(error.stack);
+                showToast('error', error);
+            });
+    };
+}
+
+bmpOutputPathBrowseButton.addEventListener('click', asyncWrapper(async () => {
     const { canceled, filePath: selectedPath } = await electron.remote.dialog.showSaveDialog({
         title: 'Bitmap file',
         buttonLabel: 'Save',
@@ -77,9 +87,9 @@ bmpOutputPathBrowseButton.addEventListener('click', async () => {
         return;
     }
     bmpOutputPathInput.value = selectedPath;
-});
+}));
 
-bmpOutputSubmitButton.addEventListener('click', async () => {
+bmpOutputSubmitButton.addEventListener('click', asyncWrapper(async () => {
     if (!bmpOutputPathInput.value || !shatterMapInputElement.value) {
         return;
     }
@@ -87,9 +97,9 @@ bmpOutputSubmitButton.addEventListener('click', async () => {
     const encodedData = encode(shatterMapInputElement.value.split('\n'));
     await fs.promises.writeFile(bmpOutputPathInput.value, encodedData.data);
     showToast('success', `Wrote BMP to ${bmpOutputPathInput.value} successfully.`);
-});
+}));
 
-bmpInputBrowseButton.addEventListener('click', async () => {
+bmpInputBrowseButton.addEventListener('click', asyncWrapper(async () => {
     const { canceled, filePaths: selectedPaths } = await electron.remote.dialog.showOpenDialog({
         title: 'Bitmap file',
         buttonLabel: 'Open',
@@ -110,7 +120,7 @@ bmpInputBrowseButton.addEventListener('click', async () => {
     const bitmapFile = await fs.promises.readFile(selectedPath);
     const decodedData = decode(bitmapFile);
     shatterMapOutputElement.value = decodedData.join('\n');
-});
+}));
 
 shatterMapOutputCopyButton.addEventListener('click', () => {
     shatterMapOutputElement.select();
