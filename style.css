@@ -91,15 +91,15 @@ p {
     top: 2em;
     right: 1.5em;
     box-shadow: 0 0 8px #888;
-    background-color: rgb(235, 223, 66);
+    background-color: rgb(243, 218, 44);
 }
 
 #shatterMapOutputCopyButton:hover {
-    background-color: rgb(253, 244, 120);
+    background-color: rgb(255, 239, 134);
 }
 
 #shatterMapOutputCopyButton:active {
-    background-color: rgb(201, 190, 37);
+    background-color: rgb(216, 195, 57);
 }
 
 button {
@@ -153,14 +153,14 @@ textarea {
 }
 
 #toast.success {
-    background-color: rgb(47, 175, 14);
+    background-color: rgb(45, 187, 56);
     color: #fff;
     max-height: 4em;
     overflow-y: auto;
 }
 
 #toast.error {
-    background-color: rgb(241, 79, 30);
+    background-color: rgb(249, 80, 42);
     color: #fff;
     max-height: 4em;
     overflow-y: auto;
